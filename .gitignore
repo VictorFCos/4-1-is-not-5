@@ -39,3 +39,5 @@ desktop.ini
 build/
 dist/
 *.egg-info/
+
+checkpoint.jsoncheckpoint.json
