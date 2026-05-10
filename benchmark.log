@@ -1,0 +1,429 @@
+[11:53:27] === BENCHMARK iniciado | tag=direto ===
+[11:53:27] Carregando: dataset.csv
+[11:53:27] Total no dataset: 100 linhas
+[11:53:27] Limitado a: 3
+[11:53:27] Checkpoint: 6 pares (id, modelo, tag) ja feitos
+[11:53:27] Modelos: {'llama-8b': 'llama-3.1-8b-instant', 'llama-70b': 'llama-3.3-70b-versatile'}
+[11:53:27] [1/6] ID_1 | llama-8b
+[11:53:28]   [OK] resp=A (correta=A)  tokens=279  lat=0.444s  acc parcial=1/1 (100.0%)
+[11:53:30] [2/6] ID_1 | llama-70b
+[11:53:30]   [OK] resp=A (correta=A)  tokens=280  lat=0.384s  acc parcial=1/1 (100.0%)
+[11:53:32] [3/6] ID_2 | llama-8b
+[11:53:33]   [OK] resp=A (correta=A)  tokens=389  lat=0.565s  acc parcial=2/2 (100.0%)
+[11:53:35] [4/6] ID_2 | llama-70b
+[11:53:35]   [OK] resp=A (correta=A)  tokens=390  lat=0.275s  acc parcial=2/2 (100.0%)
+[11:53:38] [5/6] ID_3 | llama-8b
+[11:53:38]   [OK] resp=E (correta=E)  tokens=599  lat=0.334s  acc parcial=3/3 (100.0%)
+[11:53:40] [6/6] ID_3 | llama-70b
+[11:53:40]   [OK] resp=E (correta=E)  tokens=599  lat=0.315s  acc parcial=3/3 (100.0%)
+[11:53:42] 
+============================================================
+[11:53:42] BENCHMARK CONCLUIDO
+[11:53:42] ============================================================
+[11:53:42]   llama-8b: 3/3 (100.0%)
+[11:53:42]   llama-70b: 3/3 (100.0%)
+[11:53:42] 
+Resultados em: resultados.csv
+[11:53:42] Para analise:  python analise.py
+[11:56:15] === BENCHMARK iniciado | tag=direto ===
+[11:56:15] Carregando: dataset.csv
+[11:56:15] Total no dataset: 100 linhas
+[11:56:15] Checkpoint: 12 pares (id, modelo, tag) ja feitos
+[11:56:15] Modelos: {'llama-8b': 'llama-3.1-8b-instant', 'llama-70b': 'llama-3.3-70b-versatile'}
+[11:56:15] [7/200] ID_4 | llama-8b
+[11:56:16]   [OK] resp=C (correta=C)  tokens=655  lat=0.487s  acc parcial=1/1 (100.0%)
+[11:56:18] [8/200] ID_4 | llama-70b
+[11:56:18]   [OK] resp=C (correta=C)  tokens=655  lat=0.285s  acc parcial=1/1 (100.0%)
+[11:56:20] [9/200] ID_5 | llama-8b
+[11:56:20]   [OK] resp=B (correta=B)  tokens=518  lat=0.275s  acc parcial=2/2 (100.0%)
+[11:56:22] [10/200] ID_5 | llama-70b
+[11:56:23]   [OK] resp=B (correta=B)  tokens=518  lat=0.322s  acc parcial=2/2 (100.0%)
+[11:56:25] [11/200] ID_6 | llama-8b
+[11:56:25]   [OK] resp=E (correta=E)  tokens=475  lat=0.289s  acc parcial=3/3 (100.0%)
+[11:56:27] [12/200] ID_6 | llama-70b
+[11:56:28]   [OK] resp=E (correta=E)  tokens=475  lat=0.319s  acc parcial=3/3 (100.0%)
+[11:56:30] [13/200] ID_7 | llama-8b
+[11:56:30]   [OK] resp=C (correta=C)  tokens=427  lat=0.29s  acc parcial=4/4 (100.0%)
+[11:56:32] [14/200] ID_7 | llama-70b
+[11:56:32]   [OK] resp=C (correta=C)  tokens=427  lat=0.303s  acc parcial=4/4 (100.0%)
+[11:56:34] [15/200] ID_8 | llama-8b
+[11:56:35]   [OK] resp=E (correta=E)  tokens=630  lat=0.378s  acc parcial=5/5 (100.0%)
+[11:56:37] [16/200] ID_8 | llama-70b
+[11:56:37]   [OK] resp=E (correta=E)  tokens=630  lat=0.278s  acc parcial=5/5 (100.0%)
+[11:56:39] [17/200] ID_9 | llama-8b
+[11:56:40]   [OK] resp=D (correta=D)  tokens=608  lat=0.398s  acc parcial=6/6 (100.0%)
+[11:56:42] [18/200] ID_9 | llama-70b
+[11:56:42]   [OK] resp=D (correta=D)  tokens=608  lat=0.321s  acc parcial=6/6 (100.0%)
+[11:56:44] [19/200] ID_10 | llama-8b
+[11:56:45]   [OK] resp=D (correta=D)  tokens=659  lat=0.38s  acc parcial=7/7 (100.0%)
+[11:56:47] [20/200] ID_10 | llama-70b
+[11:56:47]   [OK] resp=D (correta=D)  tokens=658  lat=0.281s  acc parcial=7/7 (100.0%)
+[11:56:49] [21/200] ID_11 | llama-8b
+[11:56:49]   [OK] resp=C (correta=C)  tokens=552  lat=0.317s  acc parcial=8/8 (100.0%)
+[11:56:51] [22/200] ID_11 | llama-70b
+[11:56:52]   [OK] resp=C (correta=C)  tokens=552  lat=0.317s  acc parcial=8/8 (100.0%)
+[11:56:54] [23/200] ID_12 | llama-8b
+[11:56:54]   [OK] resp=B (correta=B)  tokens=683  lat=0.39s  acc parcial=9/9 (100.0%)
+[11:56:56] [24/200] ID_12 | llama-70b
+[11:56:57]   [OK] resp=B (correta=B)  tokens=683  lat=0.326s  acc parcial=9/9 (100.0%)
+[11:56:59] [25/200] ID_13 | llama-8b
+[11:56:59]   [OK] resp=D (correta=D)  tokens=492  lat=0.288s  acc parcial=10/10 (100.0%)
+[11:57:01] [26/200] ID_13 | llama-70b
+[11:57:02]   [OK] resp=D (correta=D)  tokens=492  lat=0.318s  acc parcial=10/10 (100.0%)
+[11:57:04] [27/200] ID_14 | llama-8b
+[11:57:04]   [OK] resp=E (correta=E)  tokens=437  lat=0.354s  acc parcial=11/11 (100.0%)
+[11:57:06] [28/200] ID_14 | llama-70b
+[11:57:06]   [OK] resp=E (correta=E)  tokens=437  lat=0.29s  acc parcial=11/11 (100.0%)
+[11:57:08] [29/200] ID_15 | llama-8b
+[11:57:09]   [OK] resp=D (correta=D)  tokens=546  lat=0.558s  acc parcial=12/12 (100.0%)
+[11:57:11] [30/200] ID_15 | llama-70b
+[11:57:11]   [OK] resp=D (correta=D)  tokens=546  lat=0.364s  acc parcial=12/12 (100.0%)
+[11:57:14] [31/200] ID_16 | llama-8b
+[11:57:14]   [OK] resp=D (correta=D)  tokens=610  lat=0.292s  acc parcial=13/13 (100.0%)
+[11:57:16] [32/200] ID_16 | llama-70b
+[11:57:16]   [OK] resp=D (correta=D)  tokens=610  lat=0.396s  acc parcial=13/13 (100.0%)
+[11:57:18] [33/200] ID_17 | llama-8b
+[11:57:19]   [OK] resp=C (correta=C)  tokens=602  lat=0.321s  acc parcial=14/14 (100.0%)
+[11:57:21] [34/200] ID_17 | llama-70b
+[11:57:21]   [OK] resp=C (correta=C)  tokens=602  lat=0.398s  acc parcial=14/14 (100.0%)
+[11:57:23] [35/200] ID_18 | llama-8b
+[11:57:24]   [X ] resp=B (correta=C)  tokens=691  lat=0.373s  acc parcial=14/15 (93.3%)
+[11:57:26] [36/200] ID_18 | llama-70b
+[11:57:26]   [X ] resp=D (correta=C)  tokens=691  lat=0.284s  acc parcial=14/15 (93.3%)
+[11:57:28] [37/200] ID_19 | llama-8b
+[11:57:29]   [X ] resp=B (correta=C)  tokens=691  lat=0.34s  acc parcial=14/16 (87.5%)
+[11:57:31] [38/200] ID_19 | llama-70b
+[11:57:31]   [X ] resp=D (correta=C)  tokens=691  lat=0.28s  acc parcial=14/16 (87.5%)
+[11:57:33] [39/200] ID_20 | llama-8b
+[11:57:33]   [OK] resp=B (correta=B)  tokens=545  lat=0.284s  acc parcial=15/17 (88.2%)
+[11:57:35] [40/200] ID_20 | llama-70b
+[11:57:36]   [OK] resp=B (correta=B)  tokens=545  lat=0.386s  acc parcial=15/17 (88.2%)
+[11:57:38] [41/200] ID_21 | llama-8b
+[11:57:38]   [X ] resp=A (correta=D)  tokens=454  lat=0.364s  acc parcial=15/18 (83.3%)
+[11:57:40] [42/200] ID_21 | llama-70b
+[11:57:41]   [X ] resp=A (correta=D)  tokens=453  lat=0.264s  acc parcial=15/18 (83.3%)
+[11:57:43] [43/200] ID_22 | llama-8b
+[11:57:43]   [X ] resp=E (correta=B)  tokens=514  lat=0.288s  acc parcial=15/19 (78.9%)
+[11:57:45] [44/200] ID_22 | llama-70b
+[11:57:45]   [OK] resp=B (correta=B)  tokens=515  lat=0.279s  acc parcial=16/19 (84.2%)
+[11:57:48] [45/200] ID_23 | llama-8b
+[11:57:48]   [X ] resp=A (correta=C)  tokens=569  lat=0.312s  acc parcial=15/20 (75.0%)
+[11:57:50] [46/200] ID_23 | llama-70b
+[11:57:50]   [X ] resp=D (correta=C)  tokens=569  lat=0.317s  acc parcial=16/20 (80.0%)
+[11:57:52] [47/200] ID_24 | llama-8b
+[11:57:53]   [X ] resp=A (correta=E)  tokens=821  lat=0.305s  acc parcial=15/21 (71.4%)
+[11:57:55] [48/200] ID_24 | llama-70b
+[11:57:55]   [OK] resp=E (correta=E)  tokens=821  lat=0.325s  acc parcial=17/21 (81.0%)
+[11:57:57] [49/200] ID_25 | llama-8b
+[11:57:58]   [X ] resp=D (correta=A)  tokens=494  lat=0.293s  acc parcial=15/22 (68.2%)
+[11:58:00] [50/200] ID_25 | llama-70b
+[11:58:00]   [X ] resp=D (correta=A)  tokens=494  lat=0.274s  acc parcial=17/22 (77.3%)
+[11:58:02] [51/200] ID_26 | llama-8b
+[11:58:02]   [OK] resp=C (correta=C)  tokens=527  lat=0.287s  acc parcial=16/23 (69.6%)
+[11:58:04] [52/200] ID_26 | llama-70b
+[11:58:05]   [OK] resp=C (correta=C)  tokens=527  lat=0.273s  acc parcial=18/23 (78.3%)
+[11:58:07] [53/200] ID_27 | llama-8b
+[11:58:07]   [OK] resp=E (correta=E)  tokens=347  lat=0.349s  acc parcial=17/24 (70.8%)
+[11:58:09] [54/200] ID_27 | llama-70b
+[11:58:09]   [OK] resp=E (correta=E)  tokens=347  lat=0.258s  acc parcial=19/24 (79.2%)
+[11:58:12] [55/200] ID_28 | llama-8b
+[11:58:12]   [OK] resp=C (correta=C)  tokens=369  lat=0.355s  acc parcial=18/25 (72.0%)
+[11:58:14] [56/200] ID_28 | llama-70b
+[11:58:14]   [OK] resp=C (correta=C)  tokens=369  lat=0.355s  acc parcial=20/25 (80.0%)
+[11:58:17] [57/200] ID_29 | llama-8b
+[11:58:17]   [OK] resp=E (correta=E)  tokens=395  lat=0.283s  acc parcial=19/26 (73.1%)
+[11:58:19] [58/200] ID_29 | llama-70b
+[11:58:19]   [OK] resp=E (correta=E)  tokens=395  lat=0.358s  acc parcial=21/26 (80.8%)
+[11:58:21] [59/200] ID_30 | llama-8b
+[11:58:22]   [OK] resp=B (correta=B)  tokens=445  lat=0.373s  acc parcial=20/27 (74.1%)
+[11:58:24] [60/200] ID_30 | llama-70b
+[11:58:24]   [OK] resp=B (correta=B)  tokens=444  lat=0.266s  acc parcial=22/27 (81.5%)
+[11:58:26] [61/200] ID_31 | llama-8b
+[11:58:27]   [OK] resp=E (correta=E)  tokens=410  lat=0.374s  acc parcial=21/28 (75.0%)
+[11:58:29] [62/200] ID_31 | llama-70b
+[11:58:29]   [OK] resp=E (correta=E)  tokens=410  lat=0.369s  acc parcial=23/28 (82.1%)
+[11:58:31] [63/200] ID_32 | llama-8b
+[11:58:32]   [OK] resp=B (correta=B)  tokens=390  lat=0.448s  acc parcial=22/29 (75.9%)
+[11:58:34] [64/200] ID_32 | llama-70b
+[11:58:34]   [OK] resp=B (correta=B)  tokens=391  lat=0.306s  acc parcial=24/29 (82.8%)
+[11:58:36] [65/200] ID_33 | llama-8b
+[11:58:36]   [OK] resp=D (correta=D)  tokens=358  lat=0.357s  acc parcial=23/30 (76.7%)
+[11:58:39] [66/200] ID_33 | llama-70b
+[11:58:39]   [OK] resp=D (correta=D)  tokens=358  lat=0.316s  acc parcial=25/30 (83.3%)
+[11:58:41] [67/200] ID_34 | llama-8b
+[11:58:41]   [OK] resp=B (correta=B)  tokens=356  lat=0.353s  acc parcial=24/31 (77.4%)
+[11:58:43] [68/200] ID_34 | llama-70b
+[11:58:44]   [OK] resp=B (correta=B)  tokens=356  lat=0.382s  acc parcial=26/31 (83.9%)
+[11:58:46] [69/200] ID_35 | llama-8b
+[11:58:46]   [OK] resp=A (correta=A)  tokens=436  lat=0.361s  acc parcial=25/32 (78.1%)
+[11:58:48] [70/200] ID_35 | llama-70b
+[11:58:49]   [OK] resp=A (correta=A)  tokens=437  lat=0.379s  acc parcial=27/32 (84.4%)
+[11:58:51] [71/200] ID_36 | llama-8b
+[11:58:51]   [OK] resp=D (correta=D)  tokens=319  lat=0.351s  acc parcial=26/33 (78.8%)
+[11:58:53] [72/200] ID_36 | llama-70b
+[11:58:54]   [OK] resp=D (correta=D)  tokens=319  lat=0.311s  acc parcial=28/33 (84.8%)
+[11:58:56] [73/200] ID_37 | llama-8b
+[11:58:56]   [OK] resp=D (correta=D)  tokens=584  lat=0.449s  acc parcial=27/34 (79.4%)
+[11:58:58] [74/200] ID_37 | llama-70b
+[11:58:59]   [OK] resp=D (correta=D)  tokens=584  lat=0.278s  acc parcial=29/34 (85.3%)
+[11:59:01] [75/200] ID_38 | llama-8b
+[11:59:01]   [OK] resp=E (correta=E)  tokens=350  lat=0.36s  acc parcial=28/35 (80.0%)
+[11:59:03] [76/200] ID_38 | llama-70b
+[11:59:03]   [OK] resp=E (correta=E)  tokens=350  lat=0.262s  acc parcial=30/35 (85.7%)
+[11:59:05] [77/200] ID_39 | llama-8b
+[11:59:06]   [OK] resp=B (correta=B)  tokens=413  lat=0.284s  acc parcial=29/36 (80.6%)
+[11:59:08] [78/200] ID_39 | llama-70b
+[11:59:08]   [OK] resp=B (correta=B)  tokens=413  lat=0.458s  acc parcial=31/36 (86.1%)
+[11:59:10] [79/200] ID_40 | llama-8b
+[11:59:11]   [OK] resp=B (correta=B)  tokens=390  lat=0.365s  acc parcial=30/37 (81.1%)
+[11:59:13] [80/200] ID_40 | llama-70b
+[11:59:13]   [OK] resp=B (correta=B)  tokens=390  lat=0.261s  acc parcial=32/37 (86.5%)
+[11:59:15] [81/200] ID_41 | llama-8b
+[11:59:16]   [OK] resp=A (correta=A)  tokens=518  lat=0.287s  acc parcial=31/38 (81.6%)
+[11:59:18] [82/200] ID_41 | llama-70b
+[11:59:18]   [OK] resp=A (correta=A)  tokens=517  lat=0.356s  acc parcial=33/38 (86.8%)
+[11:59:20] [83/200] ID_42 | llama-8b
+[11:59:20]   [OK] resp=B (correta=B)  tokens=338  lat=0.349s  acc parcial=32/39 (82.1%)
+[11:59:23] [84/200] ID_42 | llama-70b
+[11:59:23]   [OK] resp=B (correta=B)  tokens=338  lat=0.347s  acc parcial=34/39 (87.2%)
+[11:59:25] [85/200] ID_43 | llama-8b
+[11:59:25]   [OK] resp=C (correta=C)  tokens=536  lat=0.459s  acc parcial=33/40 (82.5%)
+[11:59:28] [86/200] ID_43 | llama-70b
+[11:59:28]   [OK] resp=C (correta=C)  tokens=536  lat=0.361s  acc parcial=35/40 (87.5%)
+[11:59:30] [87/200] ID_44 | llama-8b
+[11:59:31]   [OK] resp=D (correta=D)  tokens=321  lat=0.535s  acc parcial=34/41 (82.9%)
+[11:59:33] [88/200] ID_44 | llama-70b
+[11:59:33]   [OK] resp=D (correta=D)  tokens=321  lat=0.281s  acc parcial=36/41 (87.8%)
+[11:59:35] [89/200] ID_45 | llama-8b
+[11:59:35]   [OK] resp=C (correta=C)  tokens=412  lat=0.387s  acc parcial=35/42 (83.3%)
+[11:59:38] [90/200] ID_45 | llama-70b
+[11:59:38]   [OK] resp=C (correta=C)  tokens=412  lat=0.364s  acc parcial=37/42 (88.1%)
+[11:59:40] [91/200] ID_46 | llama-8b
+[11:59:40]   [OK] resp=A (correta=A)  tokens=340  lat=0.341s  acc parcial=36/43 (83.7%)
+[11:59:42] [92/200] ID_46 | llama-70b
+[11:59:43]   [OK] resp=A (correta=A)  tokens=341  lat=0.308s  acc parcial=38/43 (88.4%)
+[11:59:45] [93/200] ID_47 | llama-8b
+[11:59:45]   [OK] resp=E (correta=E)  tokens=509  lat=0.277s  acc parcial=37/44 (84.1%)
+[11:59:47] [94/200] ID_47 | llama-70b
+[11:59:47]   [OK] resp=E (correta=E)  tokens=509  lat=0.273s  acc parcial=39/44 (88.6%)
+[11:59:50] [95/200] ID_48 | llama-8b
+[11:59:50]   [OK] resp=C (correta=C)  tokens=379  lat=0.328s  acc parcial=38/45 (84.4%)
+[11:59:52] [96/200] ID_48 | llama-70b
+[11:59:52]   [OK] resp=C (correta=C)  tokens=379  lat=0.352s  acc parcial=40/45 (88.9%)
+[11:59:54] [97/200] ID_49 | llama-8b
+[11:59:55]   [OK] resp=E (correta=E)  tokens=368  lat=0.354s  acc parcial=39/46 (84.8%)
+[11:59:57] [98/200] ID_49 | llama-70b
+[11:59:57]   [OK] resp=E (correta=E)  tokens=368  lat=0.265s  acc parcial=41/46 (89.1%)
+[11:59:59] [99/200] ID_50 | llama-8b
+[12:00:00]   [OK] resp=D (correta=D)  tokens=562  lat=0.303s  acc parcial=40/47 (85.1%)
+[12:00:02] [100/200] ID_50 | llama-70b
+[12:00:02]   [OK] resp=D (correta=D)  tokens=563  lat=0.529s  acc parcial=42/47 (89.4%)
+[12:00:04] [101/200] ID_51 | llama-8b
+[12:00:05]   [OK] resp=E (correta=E)  tokens=274  lat=0.374s  acc parcial=41/48 (85.4%)
+[12:00:07] [102/200] ID_51 | llama-70b
+[12:00:07]   [OK] resp=E (correta=E)  tokens=274  lat=0.293s  acc parcial=43/48 (89.6%)
+[12:00:09] [103/200] ID_52 | llama-8b
+[12:00:10]   [OK] resp=A (correta=A)  tokens=282  lat=0.747s  acc parcial=42/49 (85.7%)
+[12:00:12] [104/200] ID_52 | llama-70b
+[12:00:12]   [OK] resp=A (correta=A)  tokens=283  lat=0.259s  acc parcial=44/49 (89.8%)
+[12:00:14] [105/200] ID_53 | llama-8b
+[12:00:15]   [X ] resp=B (correta=D)  tokens=323  lat=0.321s  acc parcial=42/50 (84.0%)
+[12:00:17] [106/200] ID_53 | llama-70b
+[12:00:17]   [X ] resp=B (correta=D)  tokens=324  lat=0.393s  acc parcial=44/50 (88.0%)
+[12:00:19] [107/200] ID_54 | llama-8b
+[12:00:20]   [X ] resp=B (correta=D)  tokens=334  lat=0.355s  acc parcial=42/51 (82.4%)
+[12:00:22] [108/200] ID_54 | llama-70b
+[12:00:22]   [OK] resp=D (correta=D)  tokens=335  lat=0.401s  acc parcial=45/51 (88.2%)
+[12:00:24] [109/200] ID_55 | llama-8b
+[12:00:25]   [OK] resp=A (correta=A)  tokens=308  lat=0.262s  acc parcial=43/52 (82.7%)
+[12:00:27] [110/200] ID_55 | llama-70b
+[12:00:27]   [OK] resp=A (correta=A)  tokens=309  lat=0.351s  acc parcial=46/52 (88.5%)
+[12:00:29] [111/200] ID_56 | llama-8b
+[12:00:29]   [OK] resp=D (correta=D)  tokens=300  lat=0.341s  acc parcial=44/53 (83.0%)
+[12:00:32] [112/200] ID_56 | llama-70b
+[12:00:32]   [OK] resp=D (correta=D)  tokens=300  lat=0.284s  acc parcial=47/53 (88.7%)
+[12:00:34] [113/200] ID_57 | llama-8b
+[12:00:34]   [OK] resp=D (correta=D)  tokens=401  lat=0.473s  acc parcial=45/54 (83.3%)
+[12:00:37] [114/200] ID_57 | llama-70b
+[12:00:37]   [OK] resp=D (correta=D)  tokens=401  lat=0.403s  acc parcial=48/54 (88.9%)
+[12:00:39] [115/200] ID_58 | llama-8b
+[12:00:39]   [OK] resp=E (correta=E)  tokens=274  lat=0.281s  acc parcial=46/55 (83.6%)
+[12:00:41] [116/200] ID_58 | llama-70b
+[12:00:42]   [OK] resp=E (correta=E)  tokens=274  lat=0.342s  acc parcial=49/55 (89.1%)
+[12:00:44] [117/200] ID_59 | llama-8b
+[12:00:44]   [OK] resp=B (correta=B)  tokens=421  lat=0.35s  acc parcial=47/56 (83.9%)
+[12:00:46] [118/200] ID_59 | llama-70b
+[12:00:47]   [OK] resp=B (correta=B)  tokens=421  lat=0.312s  acc parcial=50/56 (89.3%)
+[12:00:49] [119/200] ID_60 | llama-8b
+[12:00:49]   [OK] resp=B (correta=B)  tokens=370  lat=0.412s  acc parcial=48/57 (84.2%)
+[12:00:51] [120/200] ID_60 | llama-70b
+[12:00:52]   [OK] resp=B (correta=B)  tokens=371  lat=0.289s  acc parcial=51/57 (89.5%)
+[12:00:54] [121/200] ID_61 | llama-8b
+[12:00:54]   [OK] resp=D (correta=D)  tokens=278  lat=0.26s  acc parcial=49/58 (84.5%)
+[12:00:56] [122/200] ID_61 | llama-70b
+[12:00:56]   [OK] resp=D (correta=D)  tokens=278  lat=0.297s  acc parcial=52/58 (89.7%)
+[12:00:58] [123/200] ID_62 | llama-8b
+[12:00:59]   [OK] resp=A (correta=A)  tokens=318  lat=0.346s  acc parcial=50/59 (84.7%)
+[12:01:01] [124/200] ID_62 | llama-70b
+[12:01:01]   [OK] resp=A (correta=A)  tokens=319  lat=0.348s  acc parcial=53/59 (89.8%)
+[12:01:03] [125/200] ID_63 | llama-8b
+[12:01:04]   [OK] resp=E (correta=E)  tokens=352  lat=0.355s  acc parcial=51/60 (85.0%)
+[12:01:06] [126/200] ID_63 | llama-70b
+[12:01:06]   [OK] resp=E (correta=E)  tokens=352  lat=0.316s  acc parcial=54/60 (90.0%)
+[12:01:08] [127/200] ID_64 | llama-8b
+[12:01:08]   [OK] resp=B (correta=B)  tokens=359  lat=0.349s  acc parcial=52/61 (85.2%)
+[12:01:11] [128/200] ID_64 | llama-70b
+[12:01:11]   [OK] resp=B (correta=B)  tokens=360  lat=0.374s  acc parcial=55/61 (90.2%)
+[12:01:13] [129/200] ID_65 | llama-8b
+[12:01:13]   [OK] resp=A (correta=A)  tokens=393  lat=0.363s  acc parcial=53/62 (85.5%)
+[12:01:16] [130/200] ID_65 | llama-70b
+[12:01:16]   [OK] resp=A (correta=A)  tokens=394  lat=0.272s  acc parcial=56/62 (90.3%)
+[12:01:18] [131/200] ID_66 | llama-8b
+[12:01:18]   [X ] resp=A (correta=B)  tokens=305  lat=0.357s  acc parcial=53/63 (84.1%)
+[12:01:20] [132/200] ID_66 | llama-70b
+[12:01:21]   [X ] resp=A (correta=B)  tokens=305  lat=0.337s  acc parcial=56/63 (88.9%)
+[12:01:23] [133/200] ID_67 | llama-8b
+[12:01:23]   [OK] resp=C (correta=C)  tokens=336  lat=0.35s  acc parcial=54/64 (84.4%)
+[12:01:25] [134/200] ID_67 | llama-70b
+[12:01:26]   [OK] resp=C (correta=C)  tokens=337  lat=0.292s  acc parcial=57/64 (89.1%)
+[12:01:28] [135/200] ID_68 | llama-8b
+[12:01:28]   [OK] resp=D (correta=D)  tokens=426  lat=0.413s  acc parcial=55/65 (84.6%)
+[12:01:30] [136/200] ID_68 | llama-70b
+[12:01:30]   [OK] resp=D (correta=D)  tokens=425  lat=0.311s  acc parcial=58/65 (89.2%)
+[12:01:33] [137/200] ID_69 | llama-8b
+[12:01:33]   [OK] resp=B (correta=B)  tokens=210  lat=0.35s  acc parcial=56/66 (84.8%)
+[12:01:35] [138/200] ID_69 | llama-70b
+[12:01:35]   [OK] resp=B (correta=B)  tokens=211  lat=0.321s  acc parcial=59/66 (89.4%)
+[12:01:37] [139/200] ID_70 | llama-8b
+[12:01:38]   [X ] resp=B (correta=D)  tokens=355  lat=0.382s  acc parcial=56/67 (83.6%)
+[12:01:40] [140/200] ID_70 | llama-70b
+[12:01:40]   [OK] resp=D (correta=D)  tokens=355  lat=0.307s  acc parcial=60/67 (89.6%)
+[12:01:42] [141/200] ID_71 | llama-8b
+[12:01:43]   [OK] resp=B (correta=B)  tokens=264  lat=0.37s  acc parcial=57/68 (83.8%)
+[12:01:45] [142/200] ID_71 | llama-70b
+[12:01:45]   [OK] resp=B (correta=B)  tokens=264  lat=0.264s  acc parcial=61/68 (89.7%)
+[12:01:47] [143/200] ID_72 | llama-8b
+[12:01:48]   [OK] resp=E (correta=E)  tokens=313  lat=0.447s  acc parcial=58/69 (84.1%)
+[12:01:50] [144/200] ID_72 | llama-70b
+[12:01:50]   [OK] resp=E (correta=E)  tokens=313  lat=0.348s  acc parcial=62/69 (89.9%)
+[12:01:52] [145/200] ID_73 | llama-8b
+[12:01:53]   [OK] resp=B (correta=B)  tokens=258  lat=0.348s  acc parcial=59/70 (84.3%)
+[12:01:55] [146/200] ID_73 | llama-70b
+[12:01:55]   [X ] resp=D (correta=B)  tokens=259  lat=0.302s  acc parcial=62/70 (88.6%)
+[12:01:57] [147/200] ID_74 | llama-8b
+[12:01:57]   [OK] resp=A (correta=A)  tokens=324  lat=0.373s  acc parcial=60/71 (84.5%)
+[12:01:59] [148/200] ID_74 | llama-70b
+[12:02:00]   [OK] resp=A (correta=A)  tokens=325  lat=0.325s  acc parcial=63/71 (88.7%)
+[12:02:02] [149/200] ID_75 | llama-8b
+[12:02:02]   [X ] resp=C (correta=B)  tokens=297  lat=0.341s  acc parcial=60/72 (83.3%)
+[12:02:04] [150/200] ID_75 | llama-70b
+[12:02:05]   [OK] resp=B (correta=B)  tokens=297  lat=0.344s  acc parcial=64/72 (88.9%)
+[12:02:07] [151/200] ID_76 | llama-8b
+[12:02:07]   [X ] resp=C (correta=E)  tokens=305  lat=0.259s  acc parcial=60/73 (82.2%)
+[12:02:09] [152/200] ID_76 | llama-70b
+[12:02:09]   [OK] resp=E (correta=E)  tokens=305  lat=0.281s  acc parcial=65/73 (89.0%)
+[12:02:12] [153/200] ID_77 | llama-8b
+[12:02:12]   [X ] resp=D (correta=E)  tokens=585  lat=0.4s  acc parcial=60/74 (81.1%)
+[12:02:14] [154/200] ID_77 | llama-70b
+[12:02:15]   [X ] resp=D (correta=E)  tokens=586  lat=0.443s  acc parcial=65/74 (87.8%)
+[12:02:17] [155/200] ID_78 | llama-8b
+[12:02:17]   [X ] resp=E (correta=C)  tokens=361  lat=0.297s  acc parcial=60/75 (80.0%)
+[12:02:19] [156/200] ID_78 | llama-70b
+[12:02:19]   [OK] resp=C (correta=C)  tokens=362  lat=0.466s  acc parcial=66/75 (88.0%)
+[12:02:22] [157/200] ID_79 | llama-8b
+[12:02:22]   [X ] resp=E (correta=B)  tokens=361  lat=0.385s  acc parcial=60/76 (78.9%)
+[12:02:24] [158/200] ID_79 | llama-70b
+[12:02:24]   [X ] resp=C (correta=B)  tokens=361  lat=0.386s  acc parcial=66/76 (86.8%)
+[12:02:27] [159/200] ID_80 | llama-8b
+[12:02:27]   [X ] resp=A (correta=C)  tokens=255  lat=0.259s  acc parcial=60/77 (77.9%)
+[12:02:29] [160/200] ID_80 | llama-70b
+[12:02:29]   [OK] resp=C (correta=C)  tokens=256  lat=0.317s  acc parcial=67/77 (87.0%)
+[12:02:31] [161/200] ID_81 | llama-8b
+[12:02:32]   [X ] resp=C (correta=E)  tokens=252  lat=0.263s  acc parcial=60/78 (76.9%)
+[12:02:34] [162/200] ID_81 | llama-70b
+[12:02:34]   [X ] resp=D (correta=E)  tokens=252  lat=0.254s  acc parcial=67/78 (85.9%)
+[12:02:36] [163/200] ID_82 | llama-8b
+[12:02:36]   [X ] resp=B (correta=C)  tokens=362  lat=0.36s  acc parcial=60/79 (75.9%)
+[12:02:39] [164/200] ID_82 | llama-70b
+[12:02:39]   [X ] resp=B (correta=C)  tokens=363  lat=0.361s  acc parcial=67/79 (84.8%)
+[12:02:41] [165/200] ID_83 | llama-8b
+[12:02:41]   [X ] resp=A (correta=E)  tokens=623  lat=0.334s  acc parcial=60/80 (75.0%)
+[12:02:43] [166/200] ID_83 | llama-70b
+[12:02:44]   [X ] resp=A (correta=E)  tokens=685  lat=0.602s  acc parcial=67/80 (83.8%)
+[12:02:46] [167/200] ID_84 | llama-8b
+[12:02:47]   [OK] resp=A (correta=A)  tokens=391  lat=0.401s  acc parcial=61/81 (75.3%)
+[12:02:49] [168/200] ID_84 | llama-70b
+[12:02:49]   [OK] resp=A (correta=A)  tokens=392  lat=0.291s  acc parcial=68/81 (84.0%)
+[12:02:51] [169/200] ID_85 | llama-8b
+[12:02:51]   [OK] resp=C (correta=C)  tokens=255  lat=0.391s  acc parcial=62/82 (75.6%)
+[12:02:53] [170/200] ID_85 | llama-70b
+[12:02:54]   [X ] resp=A (correta=C)  tokens=256  lat=0.264s  acc parcial=68/82 (82.9%)
+[12:02:56] [171/200] ID_86 | llama-8b
+[12:02:56]   [OK] resp=B (correta=B)  tokens=281  lat=0.269s  acc parcial=63/83 (75.9%)
+[12:02:58] [172/200] ID_86 | llama-70b
+[12:02:58]   [OK] resp=B (correta=B)  tokens=281  lat=0.257s  acc parcial=69/83 (83.1%)
+[12:03:01] [173/200] ID_87 | llama-8b
+[12:03:01]   [X ] resp=B (correta=D)  tokens=232  lat=0.259s  acc parcial=63/84 (75.0%)
+[12:03:03] [174/200] ID_87 | llama-70b
+[12:03:03]   [OK] resp=D (correta=D)  tokens=233  lat=0.345s  acc parcial=70/84 (83.3%)
+[12:03:05] [175/200] ID_88 | llama-8b
+[12:03:06]   [X ] resp=C (correta=D)  tokens=246  lat=0.344s  acc parcial=63/85 (74.1%)
+[12:03:08] [176/200] ID_88 | llama-70b
+[12:03:08]   [X ] resp=B (correta=D)  tokens=247  lat=0.369s  acc parcial=70/85 (82.4%)
+[12:03:10] [177/200] ID_89 | llama-8b
+[12:03:11]   [X ] resp=B (correta=D)  tokens=284  lat=0.362s  acc parcial=63/86 (73.3%)
+[12:03:13] [178/200] ID_89 | llama-70b
+[12:03:13]   [X ] resp=B (correta=D)  tokens=285  lat=0.355s  acc parcial=70/86 (81.4%)
+[12:03:15] [179/200] ID_90 | llama-8b
+[12:03:16]   [X ] resp=B (correta=C)  tokens=404  lat=0.288s  acc parcial=63/87 (72.4%)
+[12:03:18] [180/200] ID_90 | llama-70b
+[12:03:18]   [OK] resp=C (correta=C)  tokens=405  lat=0.292s  acc parcial=71/87 (81.6%)
+[12:03:20] [181/200] ID_91 | llama-8b
+[12:03:20]   [X ] resp=B (correta=C)  tokens=460  lat=0.394s  acc parcial=63/88 (71.6%)
+[12:03:23] [182/200] ID_91 | llama-70b
+[12:03:23]   [X ] resp=B (correta=C)  tokens=460  lat=0.357s  acc parcial=71/88 (80.7%)
+[12:03:25] [183/200] ID_92 | llama-8b
+[12:03:25]   [OK] resp=E (correta=E)  tokens=270  lat=0.37s  acc parcial=64/89 (71.9%)
+[12:03:27] [184/200] ID_92 | llama-70b
+[12:03:28]   [X ] resp=B (correta=E)  tokens=271  lat=0.307s  acc parcial=71/89 (79.8%)
+[12:03:30] [185/200] ID_93 | llama-8b
+[12:03:30]   [X ] resp=E (correta=D)  tokens=309  lat=0.353s  acc parcial=64/90 (71.1%)
+[12:03:32] [186/200] ID_93 | llama-70b
+[12:03:33]   [X ] resp=C (correta=D)  tokens=310  lat=0.364s  acc parcial=71/90 (78.9%)
+[12:03:35] [187/200] ID_94 | llama-8b
+[12:03:35]   [OK] resp=B (correta=B)  tokens=352  lat=0.261s  acc parcial=65/91 (71.4%)
+[12:03:37] [188/200] ID_94 | llama-70b
+[12:03:37]   [X ] resp=A (correta=B)  tokens=352  lat=0.295s  acc parcial=71/91 (78.0%)
+[12:03:40] [189/200] ID_95 | llama-8b
+[12:03:40]   [X ] resp=B (correta=D)  tokens=475  lat=0.279s  acc parcial=65/92 (70.7%)
+[12:03:42] [190/200] ID_95 | llama-70b
+[12:03:42]   [X ] resp=C (correta=D)  tokens=476  lat=0.276s  acc parcial=71/92 (77.2%)
+[12:03:44] [191/200] ID_96 | llama-8b
+[12:03:45]   [X ] resp=B (correta=D)  tokens=321  lat=0.269s  acc parcial=65/93 (69.9%)
+[12:03:47] [192/200] ID_96 | llama-70b
+[12:03:47]   [X ] resp=C (correta=D)  tokens=322  lat=0.28s  acc parcial=71/93 (76.3%)
+[12:03:49] [193/200] ID_97 | llama-8b
+[12:03:49]   [X ] resp=C (correta=A)  tokens=389  lat=0.39s  acc parcial=65/94 (69.1%)
+[12:03:52] [194/200] ID_97 | llama-70b
+[12:03:52]   [X ] resp=C (correta=A)  tokens=390  lat=0.273s  acc parcial=71/94 (75.5%)
+[12:03:54] [195/200] ID_98 | llama-8b
+[12:03:54]   [OK] resp=B (correta=B)  tokens=267  lat=0.404s  acc parcial=66/95 (69.5%)
+[12:03:56] [196/200] ID_98 | llama-70b
+[12:03:57]   [OK] resp=B (correta=B)  tokens=268  lat=0.439s  acc parcial=72/95 (75.8%)
+[12:03:59] [197/200] ID_99 | llama-8b
+[12:03:59]   [OK] resp=A (correta=A)  tokens=297  lat=0.342s  acc parcial=67/96 (69.8%)
+[12:04:01] [198/200] ID_99 | llama-70b
+[12:04:02]   [OK] resp=A (correta=A)  tokens=298  lat=0.345s  acc parcial=73/96 (76.0%)
+[12:04:04] [199/200] ID_100 | llama-8b
+[12:04:04]   [X ] resp=B (correta=C)  tokens=375  lat=0.331s  acc parcial=67/97 (69.1%)
+[12:04:06] [200/200] ID_100 | llama-70b
+[12:04:07]   [X ] resp=D (correta=C)  tokens=376  lat=0.348s  acc parcial=73/97 (75.3%)
+[12:04:09] 
+============================================================
+[12:04:09] BENCHMARK CONCLUIDO
+[12:04:09] ============================================================
+[12:04:09]   llama-8b: 67/97 (69.1%)
+[12:04:09]   llama-70b: 73/97 (75.3%)
+[12:04:09] 
+Resultados em: resultados.csv
+[12:04:09] Para analise:  python analise.py
