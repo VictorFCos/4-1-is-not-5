@@ -1,4 +1,23 @@
+"""
+Benchmark de questoes de vestibular usando Groq Cloud.
+Compara Llama 3.1 8B vs Llama 3.3 70B (ambos da Meta, na Groq).
 
+Uso:
+    export GROQ_API_KEY="sua-chave"
+    python benchmark.py dataset.csv
+
+    # Rodar so um modelo:
+    python benchmark.py dataset.csv --modelos llama-8b
+    python benchmark.py dataset.csv --modelos llama-70b
+
+    # Limitar a 10 questoes (teste rapido):
+    python benchmark.py dataset.csv --limite 10
+
+    # Trocar prompt sem perder progresso anterior:
+    python benchmark.py dataset.csv --tag prompt_v2
+
+Resume automaticamente de onde parou usando checkpoint.json.
+"""
 
 import os
 import sys
@@ -18,11 +37,14 @@ except ImportError:
     print("ERRO: Instale as dependencias: pip install -r requirements.txt")
     sys.exit(1)
 
-
+# Carrega variaveis do .env (se existir). Variaveis ja setadas no ambiente
+# tem prioridade, entao da pra usar tanto .env quanto `export GROQ_API_KEY=...`.
 load_dotenv()
 
 
-
+# =============================================================================
+# CONFIGURACAO
+# =============================================================================
 
 MODELS = {
     "llama-8b":  "llama-3.1-8b-instant",      # 8B  - producao
@@ -36,8 +58,8 @@ PRICES = {
 }
 
 MAX_TOKENS = {
-    "llama-3.1-8b-instant":    64,
-    "llama-3.3-70b-versatile": 64,
+    "llama-3.1-8b-instant":    1024,
+    "llama-3.3-70b-versatile": 1024,
 }
 
 SLEEP_BETWEEN_CALLS = 2.1   # free tier = 30 RPM por modelo
@@ -48,7 +70,9 @@ CHECKPOINT_FILE = "checkpoint.json"
 LOG_FILE        = "benchmark.log"
 
 
-
+# =============================================================================
+# PROMPT - EDITE AQUI PARA EXPERIMENTAR
+# =============================================================================
 
 PROMPT_TEMPLATE = """Voce e um especialista em vestibular brasileiro (ENEM).
 
@@ -63,6 +87,9 @@ Responda APENAS com a letra da alternativa correta (A, B, C, D ou E). Nao expliq
 RESPOSTA:"""
 
 
+# =============================================================================
+# UTILITARIOS
+# =============================================================================
 
 def log(msg):
     timestamp = datetime.now().strftime("%H:%M:%S")
@@ -96,29 +123,136 @@ def carregar_dataset(caminho):
 
 
 def extrair_letra(texto):
-    
+    """Extrai A-E (ou INDETERMINADA) da resposta.
+
+    Suporta varios formatos:
+    1. JSON completo com chave 'alternativa_final' (prompt CoT/4+1)
+    2. Regex direto pra 'alternativa_final' mesmo em JSON truncado/malformado
+    3. 'RESPOSTA: X' (prompt seco)
+    4. Ultima letra A-E na string (fallback)
+    """
     if not texto:
         return None
+
+    # 1. Tenta JSON completo (formato estruturado)
+    try:
+        clean = str(texto).strip()
+        # Remove code fences ```json ... ```
+        clean = re.sub(r"^```(?:json)?\s*", "", clean)
+        clean = re.sub(r"\s*```\s*$", "", clean)
+        # Pega do primeiro { ate o ultimo }
+        m = re.search(r"\{.*\}", clean, re.DOTALL)
+        if m:
+            data = json.loads(m.group(0))
+            if isinstance(data, dict):
+                for key in ("alternativa_final", "alternativa", "resposta", "answer"):
+                    if key in data:
+                        val = str(data[key]).strip().upper()
+                        if "INDETERMINADA" in val:
+                            return "INDETERMINADA"
+                        for c in val:
+                            if c in "ABCDE":
+                                return c
+    except (json.JSONDecodeError, ValueError, TypeError):
+        pass
+
+    # 2. Regex direto pra "alternativa_final": "X" (mesmo se JSON malformado/truncado)
+    m = re.search(
+        r'"\s*alternativa[_\s]?final\s*"\s*:\s*"([A-Ea-e]|INDETERMINADA|indeterminada)',
+        str(texto),
+    )
+    if m:
+        val = m.group(1).upper()
+        if val == "INDETERMINADA":
+            return "INDETERMINADA"
+        return val
+
     txt = str(texto).upper()
 
-    
+    # 3. RESPOSTA: X (prompt seco)
     m = re.search(r"RESPOSTA\s*[:\-]?\s*\(?\s*([A-E])\b", txt)
     if m:
         return m.group(1)
 
-  
+    # 4. INDETERMINADA solta
+    if "INDETERMINADA" in txt:
+        return "INDETERMINADA"
+
+    # 5. Ultima letra A-E isolada (geralmente a conclusao)
     matches = re.findall(r"\b([A-E])\b", txt)
     if matches:
         return matches[-1]
 
+    # 6. Primeira letra A-E qualquer
     for c in txt:
         if c in "ABCDE":
             return c
     return None
 
 
+def separar_alternativas(texto):
+    """Separa 'a) ... b) ... c) ...' em dict {A: ..., B: ..., ...}.
+
+    Usado quando o prompt tem placeholders separados ({ALTERNATIVA_A}, ...).
+    """
+    vazio = {"A": "", "B": "", "C": "", "D": "", "E": ""}
+    if texto is None or (isinstance(texto, float) and pd.isna(texto)):
+        return vazio
+    texto = str(texto).strip()
+    if not texto:
+        return vazio
+
+    # Encontra "a)", "A)", "a.", "A-" etc no comeco de linha
+    padrao = r"(?:^|\n)\s*([a-eA-E])\s*[\)\.\-:]\s*"
+    matches = list(re.finditer(padrao, texto))
+    if not matches:
+        return vazio
+
+    resultado = dict(vazio)
+    for i, m in enumerate(matches):
+        letra = m.group(1).upper()
+        inicio = m.end()
+        fim = matches[i + 1].start() if i + 1 < len(matches) else len(texto)
+        if letra in resultado:
+            resultado[letra] = texto[inicio:fim].strip()
+    return resultado
+
+
+def montar_prompt(template, row):
+    """Substitui placeholders no template do prompt.
+
+    Suporta dois conjuntos de placeholders:
+    - Maiusculos (CoT): {ENUNCIADO_DA_QUESTAO}, {ALTERNATIVA_A..E}
+    - Minusculos (seco): {enunciado}, {alternativas}, {numero}, {ano}, {campo}
+    """
+    enunciado = str(row["enunciado"]).strip()
+    alternativas_str = str(row["alternativas"]).strip()
+    alts = separar_alternativas(alternativas_str)
+
+    substituicoes = {
+        # Formato CoT (placeholders maiusculos)
+        "{ENUNCIADO_DA_QUESTAO}": enunciado,
+        "{ALTERNATIVA_A}":        alts["A"],
+        "{ALTERNATIVA_B}":        alts["B"],
+        "{ALTERNATIVA_C}":        alts["C"],
+        "{ALTERNATIVA_D}":        alts["D"],
+        "{ALTERNATIVA_E}":        alts["E"],
+        # Formato seco (placeholders minusculos)
+        "{enunciado}":    enunciado,
+        "{alternativas}": alternativas_str,
+        "{numero}":       str(row["numero_questao"]),
+        "{ano}":          str(row["ano"]),
+        "{campo}":        str(row["campo"]),
+    }
+
+    prompt = template
+    for k, v in substituicoes.items():
+        prompt = prompt.replace(k, v)
+    return prompt
+
+
 def normalizar_correta(resp):
-    
+    """'A)' -> 'A', 'a' -> 'A', etc."""
     if pd.isna(resp):
         return None
     s = str(resp).upper().strip()
@@ -165,6 +299,9 @@ def append_resultado(record):
         writer.writerow(record)
 
 
+# =============================================================================
+# CHAMADA A API
+# =============================================================================
 
 def consultar_modelo(client, model_id, prompt):
     """Faz a chamada e retorna metricas."""
@@ -199,7 +336,7 @@ def consultar_com_retry(client, model_id, prompt):
         try:
             return consultar_modelo(client, model_id, prompt)
         except RateLimitError:
-            espera = 2 ** (tentativa + 2)  
+            espera = 2 ** (tentativa + 2)  # 4, 8, 16, 32, 64
             log(f"  [rate limit] aguardando {espera}s...")
             time.sleep(espera)
         except APIError as e:
@@ -212,7 +349,9 @@ def consultar_com_retry(client, model_id, prompt):
     raise RuntimeError(f"Falhou apos {MAX_RETRIES} tentativas")
 
 
-
+# =============================================================================
+# MAIN
+# =============================================================================
 
 def main():
     ap = argparse.ArgumentParser(description="Benchmark Groq Cloud em vestibular")
@@ -228,6 +367,9 @@ def main():
     ap.add_argument("--tag", default="default",
                     help="Tag pro experimento. Trocar a tag = re-rodar tudo "
                          "(util pra testar prompts diferentes)")
+    ap.add_argument("--prompt-file", default=None,
+                    help="Caminho pra um arquivo de prompt .txt. "
+                         "Se nao passar, usa o template embutido (seco).")
     args = ap.parse_args()
 
     if not os.environ.get("GROQ_API_KEY"):
@@ -246,7 +388,19 @@ def main():
 
     client = Groq(api_key=os.environ["GROQ_API_KEY"])
 
-    log(f"=== BENCHMARK iniciado | tag={args.tag} ===")
+    # Carrega template do prompt
+    if args.prompt_file:
+        prompt_path = Path(args.prompt_file)
+        if not prompt_path.exists():
+            print(f"ERRO: arquivo de prompt nao encontrado: {args.prompt_file}")
+            sys.exit(1)
+        template = prompt_path.read_text(encoding="utf-8")
+        prompt_origem = args.prompt_file
+    else:
+        template = PROMPT_TEMPLATE
+        prompt_origem = "embutido (seco)"
+
+    log(f"=== BENCHMARK iniciado | tag={args.tag} | prompt={prompt_origem} ===")
     log(f"Carregando: {args.dataset}")
     df = carregar_dataset(args.dataset)
     log(f"Total no dataset: {len(df)} linhas")
@@ -273,13 +427,7 @@ def main():
     for _, row in df.iterrows():
         qid = str(row["id"])
         correta = normalizar_correta(row["resposta_correta"])
-        prompt = PROMPT_TEMPLATE.format(
-            numero=row["numero_questao"],
-            campo=row["campo"],
-            ano=row["ano"],
-            enunciado=str(row["enunciado"]).strip(),
-            alternativas=str(row["alternativas"]).strip(),
-        )
+        prompt = montar_prompt(template, row)
 
         for apelido, model_id in modelos.items():
             chave = (qid, apelido, args.tag)

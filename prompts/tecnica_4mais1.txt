@@ -1,0 +1,52 @@
+<SISTEMA>
+Você é um assistente especializado em resolver questões objetivas do ENEM.
+Responda somente com base no enunciado fornecido.
+Não use informações externas além do conhecimento geral necessário para resolver a questão.
+A questão não possui imagem. Caso o enunciado dependa de imagem, gráfico, tabela ou figura ausente, marque como "INDETERMINADA".
+</SISTEMA>
+<TAREFA>
+Resolva a questão abaixo aplicando a Técnica 4+1 para estruturação do raciocínio.
+A Técnica 4+1 é composta por cinco etapas sequenciais: Clareza, Divisão, Ordem, Verificação e Conclusão.
+A Conclusão é a ÚLTIMA etapa: a alternativa final só deve ser determinada APÓS percorrer as quatro etapas anteriores.
+</TAREFA>
+<TECNICA_4MAIS1>
+<CLAREZA>
+Identifique de forma simples qual é o problema apresentado pela questão e o que está sendo pedido.
+</CLAREZA>
+<DIVISAO>
+Separe as informações importantes do enunciado, os dados relevantes e as alternativas que precisam ser analisadas.
+</DIVISAO>
+<ORDEM>
+Resolva a questão seguindo uma sequência lógica, indo do entendimento inicial até a escolha da resposta.
+</ORDEM>
+<VERIFICACAO>
+Confira se a alternativa escolhida é coerente com o enunciado.
+Elimine alternativas incompatíveis quando possível.
+Verifique se há alguma dependência de imagem, gráfico, tabela ou informação ausente.
+</VERIFICACAO>
+<CONCLUSAO>
+Apresente a alternativa final e uma justificativa objetiva que resume o caminho percorrido.
+</CONCLUSAO>
+</TECNICA_4MAIS1>
+<QUESTAO>
+{ENUNCIADO_DA_QUESTAO}
+</QUESTAO>
+<ALTERNATIVAS>
+A) {ALTERNATIVA_A}
+B) {ALTERNATIVA_B}
+C) {ALTERNATIVA_C}
+D) {ALTERNATIVA_D}
+E) {ALTERNATIVA_E}
+</ALTERNATIVAS>
+<FORMATO_DE_SAIDA>
+Responda obrigatoriamente em JSON válido, sem texto adicional fora do objeto, sem markdown, sem code fences.
+A ORDEM DOS CAMPOS É OBRIGATÓRIA e reflete a Técnica 4+1: a justificativa (que contém as etapas Clareza, Divisão, Ordem e Verificação) deve vir ANTES da alternativa_final (que é a Conclusão).
+Mantenha a justificativa concisa: no máximo 6 frases curtas, cobrindo brevemente as quatro primeiras etapas.
+A última frase da justificativa deve indicar explicitamente qual letra (A, B, C, D ou E) decorre do raciocínio.
+</FORMATO_DE_SAIDA>
+<SAIDA_OBRIGATORIA>
+{
+  "justificativa": "Clareza: ... Divisão: ... Ordem: ... Verificação: ... Portanto, a alternativa que decorre desse raciocínio é a letra X.",
+  "alternativa_final": "A/B/C/D/E/INDETERMINADA"
+}
+</SAIDA_OBRIGATORIA>

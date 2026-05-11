@@ -257,6 +257,80 @@ TIPOS = {
 }
 
 
+def g_comparar_modo(df, tags_lista=None, saida=None):
+    """Modo especial: 2 subplots (um por modelo) comparando tags por campo.
+
+    Cada subplot tem barras agrupadas por campo, com 1 cor por tag.
+    Usa fig propria (nao se encaixa em g_X(ax, df, cmap)).
+    """
+    if tags_lista is None:
+        # Default: todas as tags exceto 'default' (geralmente o experimento bugado)
+        tags_lista = sorted([t for t in df["tag"].unique() if t != "default"])
+
+    df = df[df["tag"].isin(tags_lista)].copy()
+    if df.empty:
+        print(f"Sem dados para as tags: {tags_lista}")
+        return
+
+    modelos = sorted(df["modelo_apelido"].unique())
+    n = len(modelos)
+    fig, axes = plt.subplots(1, n, figsize=(9 * n, 6), sharey=True)
+    if n == 1:
+        axes = [axes]
+
+    cores_tags = {t: CORES[i % len(CORES)] for i, t in enumerate(tags_lista)}
+
+    for ax, modelo in zip(axes, modelos):
+        sub = df[df["modelo_apelido"] == modelo]
+        pivot = sub.pivot_table(
+            index="campo", columns="tag",
+            values="acertou", aggfunc="mean"
+        ) * 100
+        pivot = pivot.sort_index()
+        # Reordena colunas pra seguir a ordem solicitada
+        pivot = pivot.reindex(columns=[t for t in tags_lista if t in pivot.columns])
+
+        n_dim = sub.groupby("campo")["id"].nunique()
+        acc_geral = sub.groupby("tag")["acertou"].mean() * 100
+
+        campos = pivot.index.tolist()
+        tags_ord = pivot.columns.tolist()
+        x = np.arange(len(campos))
+        largura = 0.8 / len(tags_ord)
+
+        for i, tag in enumerate(tags_ord):
+            offset = (i - (len(tags_ord) - 1) / 2) * largura
+            valores = pivot[tag].values
+            bars = ax.bar(x + offset, valores, largura,
+                          label=f"{tag} (geral: {acc_geral[tag]:.1f}%)",
+                          color=cores_tags[tag],
+                          edgecolor="white", linewidth=0.7)
+            ax.bar_label(bars, fmt="%.0f%%", padding=2, fontsize=8)
+
+        rotulos = [f"{c}\n(n={n_dim.get(c, 0)})" for c in campos]
+        ax.set_xticks(x)
+        ax.set_xticklabels(rotulos, fontsize=9)
+        ax.set_title(f"{modelo}", fontweight="bold", fontsize=12)
+        ax.set_ylim(0, 110)
+        ax.legend(fontsize=8, loc="lower right", framealpha=0.9)
+        ax.grid(axis="y", alpha=0.3, linestyle=":")
+        ax.set_axisbelow(True)
+        for s in ("top", "right"):
+            ax.spines[s].set_visible(False)
+
+    axes[0].set_ylabel("Acuracia (%)")
+    fig.suptitle(
+        f"Comparacao de prompts por campo  -  tags: {', '.join(tags_lista)}",
+        fontsize=13, fontweight="bold", y=1.02,
+    )
+
+    plt.tight_layout()
+    saida = saida or "grafico_comparar.png"
+    plt.savefig(saida, dpi=140, bbox_inches="tight")
+    print(f"Grafico salvo em: {saida}")
+    plt.show()
+
+
 # =============================================================================
 # MAIN
 # =============================================================================
@@ -264,8 +338,11 @@ TIPOS = {
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tipo", default="todos",
-                    choices=["todos"] + list(TIPOS.keys()))
-    ap.add_argument("--tag", default=None, help="Filtrar por tag")
+                    choices=["todos", "comparar"] + list(TIPOS.keys()))
+    ap.add_argument("--tag", default=None, help="Filtrar por tag (modo unico)")
+    ap.add_argument("--tags", nargs="+", default=None,
+                    help="Lista de tags pra comparar (modo --tipo comparar). "
+                         "Default: todas exceto 'default'")
     ap.add_argument("--saida", default=None, help="Arquivo PNG de saida")
     args = ap.parse_args()
 
@@ -279,6 +356,11 @@ def main():
         if df.empty:
             print(f"Sem dados para tag={args.tag}")
             return
+
+    # Modo especial: comparar (gera figura propria com multiplos subplots)
+    if args.tipo == "comparar":
+        g_comparar_modo(df, tags_lista=args.tags, saida=args.saida)
+        return
 
     cmap = cores_modelos(df["modelo_apelido"].unique())
 
